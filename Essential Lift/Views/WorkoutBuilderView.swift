@@ -11,7 +11,8 @@ struct WorkoutBuilderView: View {
     
     @Environment(\.managedObjectContext) var moc
     
-    @FetchRequest(entity: WorkoutType.entity(), sortDescriptors: []) var workoutTypes: FetchedResults<WorkoutType>
+    @FetchRequest(entity: WorkoutType.entity(), sortDescriptors: [])
+    var workoutTypes: FetchedResults<WorkoutType>
     
     var body: some View {
         
@@ -21,6 +22,7 @@ struct WorkoutBuilderView: View {
                     Text(workoutType.name ?? "unknown")
                 }
             }
+            
             
             Button("Add") {
                 let workouts = ["pushups", "pullups", "squats", "lunges"]
