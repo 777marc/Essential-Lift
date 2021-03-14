@@ -13,6 +13,8 @@ struct WorkoutBuilderView: View {
     
     @FetchRequest(entity: WorkoutType.entity(), sortDescriptors: [])
     var workoutTypes: FetchedResults<WorkoutType>
+
+    @State private var selectedWorkout = "pullup"
     
     var body: some View {
         
@@ -23,17 +25,24 @@ struct WorkoutBuilderView: View {
                 }
             }
             
+            Picker(selection: $selectedWorkout, label: Text("Select Workout")) {
+                ForEach(self.workoutTypes, id: \.id) { workout in
+                    Text(workout.name ?? "unknown").tag(workout.name)
+                }
+            }
             
             Button("Add") {
-                let workouts = ["pushups", "pullups", "squats", "lunges"]
-                
-                let randomWorkoutType = workouts.randomElement()
-                
-                let workoutType = WorkoutType(context: self.moc)
-                workoutType.id = UUID()
-                workoutType.name = randomWorkoutType
-                
-                try? self.moc.save()
+                print("hello marc")
+                print(selectedWorkout)
+//                let workouts = ["pushups", "pullups", "squats", "lunges"]
+//
+//                let randomWorkoutType = workouts.randomElement()
+//
+//                let workoutType = WorkoutType(context: self.moc)
+//                workoutType.id = UUID()
+//                workoutType.name = randomWorkoutType
+//
+//                try? self.moc.save()
             }
             .padding()
         }
